@@ -1,7 +1,7 @@
-from tkinter import Tk, Menu, Label
+from tkinter import Tk, Button
 from tkinter.filedialog import askopenfilename
+from tkinter import font as tkFont
 import qrcode
-from PIL import ImageTk
 
 
 def openfile(w):
@@ -31,19 +31,16 @@ def openfile(w):
     qr.add_data(cleaned)
     qr.make(fit=True)
     res = qr.make_image(fill_color='black', back_color='white')
-    img = ImageTk.PhotoImage(res)
-    panel = Label(w, image=img)
-    panel.pack(side='bottom', fill='both', expand='yes')
+    res.show()
 
 
 root = Tk()
-root.title('QR Code generator for sattracker')
-menubar = Menu(root)
-filemenu = Menu(menubar, tearoff=0)
-filemenu.add_command(label='Open', command=lambda: openfile(root))
-filemenu.add_separator()
-filemenu.add_command(label='Exit', command=root.quit)
-menubar.add_cascade(label='File', menu=filemenu)
+root.title('SatTracker QR Generator')
 
-root.config(menu=menubar)
+helv36 = tkFont.Font(family='Helvetica', size=36, weight='bold')
+
+b = Button(root, bg='black', text='open file', height=6, width=12, command=lambda: openfile(root))
+b['font'] = helv36
+b.pack()
+
 root.mainloop()
