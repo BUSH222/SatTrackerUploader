@@ -28,6 +28,7 @@ def openfile(w):
         box_size=10,
         border=4,
     )
+    print(cleaned)
     qr.add_data(cleaned)
     qr.make(fit=True)
     res = qr.make_image(fill_color='black', back_color='white')
@@ -39,7 +40,8 @@ root.title('SatTracker QR Generator')
 
 helv36 = tkFont.Font(family='Helvetica', size=36, weight='bold')
 
-b = Button(root, bg='black', text='open file', height=6, width=12, command=lambda: openfile(root))
+b = Button(root, bg='black', text='open file', height=6, width=12,
+           command=lambda: openfile(root))
 b['font'] = helv36
 b.pack()
 
